@@ -1,0 +1,14 @@
+{"AQUI ES DONDE ESTARA LOS CORREOS PARA ENTRENAR --> Apache SpamAssassin Public Corpus  /Nazario Phishing Corpus #Nazario Phishing"};
+
+{
+  "asunto": "Urgente: verifica tu cuenta",
+  "remitente": "soporte@banco-falso.com",
+  "cuerpo": "Haz clic aquí para evitar el bloqueo.",
+  "urls": ["http://banco-falso.com/login"],
+  "adjuntos": ["factura.exe"],
+  "cabeceras": {
+    "dominio_origen": "servidor-raro.com"
+  },
+  "respuestas": [],
+  "etiqueta": "phishing"
+}
