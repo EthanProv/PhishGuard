@@ -7,6 +7,3 @@ analizar(correo, resultado)
 
 Pero cada clase lo hará de forma diferente.
 '''
-
-
-'''
