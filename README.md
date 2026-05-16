@@ -1,2 +1,2 @@
 # PhishGuard
-Modificamos el projecto para que sea ML
+Modificamos el projecto para que sea DL
