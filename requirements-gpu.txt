@@ -1,0 +1,6 @@
+# PHISHGUARD - Dependencias Python (GPU)
+# Usar cuando se dispone de GPU NVIDIA con drivers CUDA instalados
+# Instalar con: pip install -r requirements-gpu.txt
+
+transformers>=4.35.0
+torch>=2.0.0

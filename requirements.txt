@@ -1,0 +1,6 @@
+# PHISHGUARD - Dependencias Python (CPU)
+# Usar cuando NO se dispone de GPU NVIDIA
+# Instalar con: pip install -r requirements.txt
+
+transformers>=4.35.0
+torch>=2.0.0 --index-url https://download.pytorch.org/whl/cpu
