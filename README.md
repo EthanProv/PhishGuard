@@ -17,7 +17,7 @@ Se encarga de leer archivos `.eml` del disco y convertirlos en objetos `Email`. 
 - `parse_eml_folder`: parsea todos los archivos `.eml` de una carpeta
 
 ### `analyzers.py`
-Contiene tres clases que extraen texto del correo para pasarselo al modelo de IA. Todas heredan de `BaseAnalyzer` (clase abstracta):
+Contiene tres clases que extraen texto del correo para pasarselo al modelo de DL. Todas heredan de `BaseAnalyzer` (clase abstracta):
 - `TextAnalyzer`: extrae el asunto y el cuerpo, eliminando etiquetas HTML
 - `AttachmentAnalyzer`: extrae los nombres de los archivos adjuntos
 - `URLAnalyzer`: extrae las URLs del cuerpo usando expresiones regulares
