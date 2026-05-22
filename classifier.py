@@ -24,7 +24,7 @@ class PhishingClassifier:
 
     def __init__(self):
         print("[Clasificador] Cargando modelo de IA...")
-        print("[Clasificador] La primera vez puede tardar porque descarga el modelo.")
+        print("[Clasificador] La primera vez puede tardar porque descarga el modelo.") #Depende de la primera vez o no va ir mas lento
 
         if torch.cuda.is_available():
             device = 0
