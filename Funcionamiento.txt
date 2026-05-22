@@ -1,0 +1,11 @@
+# Carpeta con archivos .eml (o formato SpamAssassin)
+python main.py --eml  data/emails/20030228_spam/spam
+
+# Archivo JSON con hilos de correos
+python main.py --json data/emails.json
+
+# Dataset CSV etiquetado (con métricas de precisión)
+python main.py --csv  data/phishing_email_2008.csv
+
+# Modo por defecto (carga data/emails.json)
+python main.py
