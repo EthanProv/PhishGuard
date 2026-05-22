@@ -17,13 +17,11 @@ def print_report(results):
 
     legitimos = total - phishing
 
-    print("\n" + "=" * 65)
-    print("              PHISHGUARD -- INFORME DE ANALISIS")
-    print("=" * 65)
-    print(f"  Correos analizados : {total}")
-    print(f"  Phishing           : {phishing}")
-    print(f"  Legitimos          : {legitimos}")
-    print("=" * 65 + "\n")
+    print("\n")
+    print("PHISHGUARD -- INFORME DE ANALISIS")
+    print(f"Correos analizados: {total}")
+    print(f"Phishing: {phishing}")
+    print(f"Legitimos: {legitimos}")
 
     #T(n)= 1 +1 +1 +1 +n*1 +1 +1 +1 +1 --> T(n)= 4 + n +4 --> T(n) = 8 + n
 
@@ -87,20 +85,19 @@ def print_metrics(results):
     recall = round(recall, 2)
     f1 = round(f1, 2)
 
-    print("\n" + "=" * 65)
-    print("              PHISHGUARD -- METRICAS")
+    print("\n")
+    print("PHISHGUARD -- METRICAS")
     print("=" * 65)
-    print(f"  Correos con etiqueta : {total}")
-    print(f"  Accuracy             : {accuracy}%")
-    print(f"  Precision            : {precision}%")
-    print(f"  Recall               : {recall}%")
-    print(f"  F1-score             : {f1}%")
-    print("-" * 65)
-    print(f"  Verdaderos positivos : {true_positive}")
-    print(f"  Falsos positivos     : {false_positive}")
-    print(f"  Verdaderos negativos : {true_negative}")
-    print(f"  Falsos negativos     : {false_negative}")
-    print("=" * 65 + "\n")
+    print(f"Correos con etiqueta: {total}")
+    print(f"Accuracy: {accuracy}%")
+    print(f"Precision: {precision}%")
+    print(f"Recall: {recall}%")
+    print(f"F1-score: {f1}%")
+    print(f"Verdaderos positivos: {true_positive}")
+    print(f"Falsos positivos: {false_positive}")
+    print(f"Verdaderos negativos: {true_negative}")
+    print(f"Falsos negativos: {false_negative}")
+    print("\n")
     #T(n)= 1 + 1 + n*3 + n*3 + n*3 + n*3 + 1 +2 +2 +2 +2 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1  +1 --> T(n) = 2 + 3n +3n +3n +3n +23 --> T(n)= 25 +9n
 
 
@@ -114,9 +111,9 @@ def format_entry(result):
 
     lines = []
     lines.append(f"[{result['email_id']}]")
-    lines.append(f"  Asunto    : {result['subject']}")
-    lines.append(f"  Remitente : {result['sender']}")
-    lines.append(f"  Confianza : {confidence}%")
+    lines.append(f"Asunto: {result['subject']}")
+    lines.append(f"Remitente: {result['sender']}")
+    lines.append(f"Confianza: {confidence}%")
 
     analyzer_texts = result.get("analyzer_texts", {})
 
