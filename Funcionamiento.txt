@@ -9,3 +9,25 @@ python main.py --csv  data/phishing_email_2008.csv
 
 # Modo por defecto (carga data/emails.json)
 python main.py
+
+
+Nota de ejecución:
+
+El proyecto puede ejecutarse usando CPU o GPU. Si el ordenador no tiene una GPU NVIDIA compatible con CUDA, el programa se ejecutará por CPU. Esto funciona correctamente, pero puede tardar más al analizar el CSV completo.
+
+Para ejecutar con JSON:
+python main.py
+
+Para ejecutar con CSV:
+python main.py --csv data\phishing_email_2008.csv
+
+Si se quiere forzar el uso de CPU en PowerShell:
+$env:CUDA_VISIBLE_DEVICES="-1"
+python main.py --csv data\phishing_email_2008.csv
+
+Si se quiere usar GPU, PyTorch debe estar instalado con una versión de CUDA compatible con la tarjeta gráfica. En nuestro caso, con una RTX 5070 fue necesario instalar PyTorch con CUDA 12.8:
+
+python -m pip uninstall torch torchvision torchaudio -y
+python -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
+
+Si aparece el error "CUDA error: no kernel image is available for execution on the device", significa que la versión de PyTorch/CUDA no es compatible con la GPU. En ese caso se debe ejecutar en CPU o instalar una versión compatible de PyTorch.
