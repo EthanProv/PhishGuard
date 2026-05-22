@@ -23,8 +23,10 @@ def print_report(results):
     print(f"Phishing: {phishing}")                      #0(1)
     print(f"Legitimos: {legitimos}")                    #0(1)
 
-    #T(n)= 1 +1 +1 +1 +n*1 +1 +1 +1 +1 --> T(n)= 4 + n +4 --> T(n) = 8 + n
-
+    #T(n)= 1+1+(n*2)+1+1+1+1+1+1 --> T(n)= 2+2n+6 --> T(n) = 8 + 2n
+    #Big O(n)
+    #Teta O(n)
+    #Mejor caso O(n)
 
 def print_metrics(results):
     """
@@ -98,8 +100,10 @@ def print_metrics(results):
     print(f"Verdaderos negativos: {true_negative}")                            #0(1)
     print(f"Falsos negativos: {false_negative}")                               #0(1)
     print("\n")                                                                #0(1)
-    #T(n)= 1 + 1 + n*3 + n*3 + n*3 + n*3 + 1 +2 +2 +2 +2 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1  +1 --> T(n) = 2 + 3n +3n +3n +3n +23 --> T(n)= 25 +9n
-
+    #T(n)= 1+(n*2)+6+(n*5)+26 --> T(n) = 2n+5n+33 --> T(n)= 33 + 7n
+    #Big O(n)
+    #Teta O(n)
+    #Mejor caso O(n)
 
 def format_entry(result):
     """
@@ -134,15 +138,15 @@ def format_entry(result):
         else:                                                                 #0(1)
             status = "incorrecto"                                             #0(1)
 
-        lines.append(f"  Etiqueta real: {true_label} ({status})")             #0(1)
+        lines.append(f"Etiqueta real: {true_label} ({status})")             #0(1)
 
     explanation = result["explanation"]                                       #0(1)
 
     if explanation:                                                           #0(1)
-        lines.append("  Explicacion:")                                        #0(1)
+        lines.append("Explicacion:")                                        #0(1)
 
         for line in explanation:                                              #0(n)
-            lines.append(f"    - {line}")                                     #0(1)
+            lines.append(f" - {line}")                                     #0(1)
 
     lines.append("")                                                          #0(1)
 
@@ -150,7 +154,10 @@ def format_entry(result):
 
     return final_text                                                         #0(1)                                               
 
-#T(n)= 1 +1 +4 +1 max(1+n*4) +3 +3n + 1 +1 --> T(n)= 7 + 4n + 3 +3n +2 --> T(n) = 12 + 4n +3n --> T(n)= 7n + 12
+    #T(n)= 10 + (n*5) + 7 + (n*1) + 3 --> T(n)= 6n + 20
+    #Big O(n)
+    #Teta O(n)
+    #Mejor caso O(n)
 
 def export_results(results, output_dir="output"):
     """
@@ -189,4 +196,5 @@ def export_results(results, output_dir="output"):
         print(f"  - {filename}: {len(selected_results)} correos")        #0(1)
 
     print(f"[PhishGuard] Resultados exportados en '{output_dir}/'")      #0(1)
-#T(n)= 1 +2 +1 + n *(n*1+1+1++1+1*(n+1)+1) -> T(n)= 4 + n(5n*n) --> T(n)= 4 + 5n³
+    
+#T(n)= 3 + (n*2) + 1 + (n*5*n*2) + 1 -> T(n)= 4 + 2n + n^2 --> T(n)= 4 + 5n³
