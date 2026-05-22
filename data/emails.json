@@ -1,0 +1,80 @@
+[
+  {
+    "email_id": "001",
+    "headers": {
+      "sender": "support@secure-bank-alert.com",
+      "to": "user@example.com",
+      "date": "2026-05-14"
+    },
+    "subject": "Urgent action required on your account",
+    "body": "Your account will be blocked if you do not verify your details now. Click this link: http://login-bank-secure.com",
+    "attachments": [],
+    "replies": [
+      {
+        "email_id": "002",
+        "headers": {
+          "sender": "user@example.com",
+          "to": "support@secure-bank-alert.com",
+          "date": "2026-05-14"
+        },
+        "subject": "Re: Urgent action required on your account",
+        "body": "Hello, I am not sure if this email is real. Can you confirm it?",
+        "attachments": [],
+        "replies": [
+          {
+            "email_id": "003",
+            "headers": {
+              "sender": "support@secure-bank-alert.com",
+              "to": "user@example.com",
+              "date": "2026-05-14"
+            },
+            "subject": "Re: Urgent action required on your account",
+            "body": "You must answer quickly. Download the attached file and follow the instructions.",
+            "attachments": [
+              {
+                "filename": "account_verification.exe"
+              }
+            ],
+            "replies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "email_id": "009",
+    "headers": {
+      "sender": "security@fake-bank.com",
+      "to": "user@example.com",
+      "date": "2026-05-14"
+    },
+    "subject": "Your account has been locked",
+    "body": "Please verify your password immediately by clicking this link: http://fake-bank-login.com",
+    "attachments": [],
+    "replies": []
+  },
+  {
+    "email_id": "010",
+    "headers": {
+      "sender": "teacher@enti.cat",
+      "to": "students@enti.cat",
+      "date": "2026-05-14"
+    },
+    "subject": "Class reminder",
+    "body": "Hello, today we will review the project in class. You do not need to bring anything special.",
+    "attachments": [],
+    "replies": []
+  },
+  {
+    "email_id": "011",
+    "headers": {
+      "sender": "library@enti.cat",
+      "to": "students@enti.cat",
+      "date": "2026-05-14"
+    },
+    "subject": "Library schedule",
+    "body": "Hello, the library will be open from 9:00 to 18:00 this week. This is only an information message.",
+    "attachments": [],
+    "replies": []
+  }
+]
