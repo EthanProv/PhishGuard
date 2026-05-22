@@ -88,24 +88,5 @@ main.py
    |       reporter.export_results() --> output/phishing.txt y output/legitimos.txt
 ```
 
----
-
-## Estructura de carpetas
-
-```
-PhishGuard/
-├── main.py              # punto de entrada
-├── models.py            # clase Email
-├── email_parser.py      # lectura de archivos .eml
-├── analyzers.py         # extraccion de texto del correo
-├── classifier.py        # modelo DistilBERT
-├── loader.py            # carga de correos y orquestacion del analisis
-├── reporter.py          # informes y exportacion
-├── data/
-│   ├── emails.json      # hilo de correo de ejemplo (modo JSON)
-│   ├── emails/          # carpeta con archivos .eml (modo --eml)
-│   └── dataset.csv      # dataset etiquetado (modo --csv)
-└── output/
-    ├── phishing.txt     # correos clasificados como phishing
     └── legitimos.txt    # correos clasificados como legitimos
 ```
