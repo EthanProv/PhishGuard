@@ -33,38 +33,30 @@ class TextAnalyzer(BaseAnalyzer):
     """Extrae el asunto y el cuerpo del correo como texto limpio"""
 
     # Patron para eliminar etiquetas HTML
-    HTML_TAG_PATTERN = re.compile(r'<[^>]+>')
+    HTML_TAG_PATTERN = re.compile(r'<[^>]+>')   #O(1)
 
     # Patron para normalizar espacios multiples
-    WHITESPACE_PATTERN = re.compile(r'\s+')
+    WHITESPACE_PATTERN = re.compile(r'\s+')    #O(1)
 
     def get_name(self) -> str:
         return "TextAnalyzer"
-        '''
-        T(n) = 1
-        '''
+        #T(n) = 1
 
     def _strip_html(self, text: str) -> str:
         """Elimina etiquetas HTML y normaliza espacios"""
         clean = self.HTML_TAG_PATTERN.sub(' ', text)
         clean = self.WHITESPACE_PATTERN.sub(' ', clean).strip()
         return clean
-        '''
-        T(n) = 1+ 1+ 2
-        '''
-
+        #T(n) = 3
+        
     def analyze(self, email: Email) -> str:
         """Devuelve el asunto y el cuerpo limpios de HTML"""
         subject_clean = self._strip_html(email.subject)
         body_clean = self._strip_html(email.body)
         return f"{subject_clean} {body_clean}" 
-        '''
-        T(n)= 1+1+2
-        '''
-'''
-T(n) = 1 +1 + ( 1+ 4 + 4)
+        #T(n)= 3
 
-'''
+#T(n) = 1 +1 + ( 1+ 3 + 3)
 
 class AttachmentAnalyzer(BaseAnalyzer):
     """Analiza los nombres de los archivos adjuntos"""
