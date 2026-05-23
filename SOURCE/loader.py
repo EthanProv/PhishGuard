@@ -15,7 +15,7 @@ def load_email_recursive(data):
     Si el correo tiene respuestas, las carga usando recursividad.
     Complejidad: O(n), porque recorre todos los correos del hilo.
     """
-    correo = Email(
+    correo = Email(                                        #O(1)
         data["email_id"],
         data["headers"],
         data["subject"],
@@ -23,15 +23,15 @@ def load_email_recursive(data):
         data["attachments"]
     )
 
-    replies = data.get("replies", [])
+    replies = data.get("replies", [])                    #O(1)
 
-    for reply_data in replies:
-        reply = load_email_recursive(reply_data)
-        correo.add_reply(reply)
+    for reply_data in replies:                            #O(n)
+        reply = load_email_recursive(reply_data)          #O(1)
+        correo.add_reply(reply)                           #O(1)
 
-    return correo
+    return correo                                        #O(1)
 
-#T(n) = 5 +n*1 +1 --> T(n)= 6+n
+#T(n) = 2 + (n*2) +1 --> T(n)= 3 + 2n
 
 
 def analyze_thread_recursive(correo, analyzers, classifier, results):
@@ -41,24 +41,24 @@ def analyze_thread_recursive(correo, analyzers, classifier, results):
     pero cada clase lo hace de una forma distinta.
     Complejidad: O(n), porque puede recorrer todos los correos del hilo.
     """
-    analyzer_texts = {}
+    analyzer_texts = {}                                                            #O(1)
 
-    for analyzer in analyzers:
-        analyzer_name = analyzer.get_name()
-        analyzer_result = analyzer.analyze(correo)
-        analyzer_texts[analyzer_name] = analyzer_result
+    for analyzer in analyzers:                                                    #O(n)
+        analyzer_name = analyzer.get_name()                                       #O(1)
+        analyzer_result = analyzer.analyze(correo)                                #O(1)
+        analyzer_texts[analyzer_name] = analyzer_result                           #O(1)
 
-    text_parts = []
+    text_parts = []                                                               #O(1)
 
-    for text in analyzer_texts.values():
-        if text.strip():
-            text_parts.append(text)
+    for text in analyzer_texts.values():                                         #O(n)
+        if text.strip():                                                         #O(1)
+            text_parts.append(text)                                              #O(1)
 
-    combined_text = " ".join(text_parts)
+    combined_text = " ".join(text_parts)                                         #O(1)
 
-    prediction, explanation, confidence = classifier.predict(combined_text)
+    prediction, explanation, confidence = classifier.predict(combined_text)      #O(1)
 
-    result = {
+    result = {                                                                  #O(1)
         "email_id": correo.email_id,
         "subject": correo.subject,
         "sender": correo.headers.get("sender", "desconocido"),
@@ -69,11 +69,11 @@ def analyze_thread_recursive(correo, analyzers, classifier, results):
         "true_label": None
     }
 
-    results.append(result)
+    results.append(result)                                                        #O(1)
 
-    for reply in correo.replies:
-        analyze_thread_recursive(reply, analyzers, classifier, results)
-    #T(n)= n + n + 3 + 8 + n*4 --> T(n)= 2n + 4n +11 --> T(n)= 6n + 11
+    for reply in correo.replies:                                                 #O(n)
+        analyze_thread_recursive(reply, analyzers, classifier, results)          #O(1)
+    #T(n)= 1 + (n*3) + 1 + (n*2) + 4 + (n*1) --> T(n)= 6n + 6
 
 
 def load_from_json(filepath):
@@ -82,21 +82,21 @@ def load_from_json(filepath):
     Puede cargar un solo correo o una lista de correos.
     Complejidad: O(n), porque recorre todos los correos del JSON.
     """
-    with open(filepath, "r", encoding="utf-8") as json_file:
-        data = json.load(json_file)
+    with open(filepath, "r", encoding="utf-8") as json_file:                    #O(1)
+        data = json.load(json_file)                                            #O(1)
 
-    emails = []
+    emails = []                                                                #O(1)
 
-    if isinstance(data, list):
-        for email_data in data:
-            correo = load_email_recursive(email_data)
-            emails.append(correo)
-    else:
-        correo = load_email_recursive(data)
-        emails.append(correo)
+    if isinstance(data, list):                                                 #O(1)
+        for email_data in data:                                                #O(n)
+            correo = load_email_recursive(email_data)                          #O(1)
+            emails.append(correo)                                              #O(1)
+    else:                                                                      #O(1)
+        correo = load_email_recursive(data)                                    #O(1)
+        emails.append(correo)                                                  #O(1)
 
-    return emails
-#T(n)= 1 + 1 +1 --> T(n)= 3
+    return emails                                                              #O(1)
+#T(n)= 4 + (n*2) + 1 --> T(n)= 5 + 2n
 
 def clean_csv_text(text):
     """
@@ -108,24 +108,24 @@ def clean_csv_text(text):
     text = text.strip()
 
     return text
-
+#T(n)= O(4)
 
 def get_text_from_row(row):
     """Intenta sacar el texto del correo usando diferentes nombres de columna."""
-    possible_columns = [
+    possible_columns = [                            #O(1)
         "text_combined",
         "text",
         "body"
     ]
 
-    for column in possible_columns:
-        value = row.get(column, "")
+    for column in possible_columns:                #O(n)
+        value = row.get(column, "")                #O(1)
 
-        if value:
-            return value
+        if value:                                  #O(1)
+            return value                            #O(1)
 
-    return ""
-
+    return ""                                      #O(1)
+#T(n)= 1 + (n*3) + 1 --> T(n)= 2 + 3n
 
 def get_real_label(row):
     """Convierte la etiqueta del CSV en Phishing o Legitimo."""
@@ -137,7 +137,7 @@ def get_real_label(row):
 
     return "Legitimo"
 
-
+#T(n)= O(5)
 
 def load_and_evaluate_csv(csv_path, classifier, analyzers):
     """
