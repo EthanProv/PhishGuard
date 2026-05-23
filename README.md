@@ -1,92 +1,145 @@
-# PhishGuard — Documentacion
+# PHISHGUARD
 
-## Que es PhishGuard
-
-PhishGuard es un sistema de deteccion de correos de phishing. Analiza el contenido de un correo (asunto, cuerpo, adjuntos y URLs) y usa un modelo de inteligencia artificial (DistilBERT) para clasificarlo como **Phishing** o **Legitimo**, junto con una puntuacion de confianza.
+Sistema de detección de correos electrónicos de phishing mediante inteligencia artificial. Analiza correos en formato .eml, JSON y CSV, clasificándolos como Phishing o Legítimo usando el modelo DistilBERT de HuggingFace. Los resultados se exportan automáticamente a ficheros de texto con el detalle de cada correo analizado.
 
 ---
 
-## Descripcion de cada fichero
+## Integrantes del grupo
 
-### `models.py`
-Define la clase `Email`, que es la estructura de datos central de todo el programa. Cada correo se representa como un objeto con los campos: ID, cabeceras (remitente y fecha), asunto, cuerpo, adjuntos y una lista de respuestas anidadas. Esta lista permite modelar hilos de correo como un arbol recursivo.
-
-### `email_parser.py`
-Se encarga de leer archivos `.eml` del disco y convertirlos en objetos `Email`. Soporta correos con varias partes MIME (texto + HTML + adjuntos) y gestiona la decodificacion de cabeceras codificadas. Tiene dos funciones principales:
-- `parse_eml_file`: parsea un unico archivo `.eml`
-- `parse_eml_folder`: parsea todos los archivos `.eml` de una carpeta
-
-### `analyzers.py`
-Contiene tres clases que extraen texto del correo para pasarselo al modelo de DL. Todas heredan de `BaseAnalyzer` (clase abstracta):
-- `TextAnalyzer`: extrae el asunto y el cuerpo, eliminando etiquetas HTML
-- `AttachmentAnalyzer`: extrae los nombres de los archivos adjuntos
-- `URLAnalyzer`: extrae las URLs del cuerpo usando expresiones regulares
-
-### `classifier.py`
-Carga el modelo DistilBERT preentrenado de HuggingFace y lo usa para clasificar correos. El metodo `predict` recibe un texto combinado y devuelve la prediccion (`Phishing` o `Legitimo`), una explicacion y una puntuacion de confianza entre 0 y 1.
-
-### `loader.py`
-Gestiona la carga de correos desde distintas fuentes y orquesta el analisis:
-- `load_email_recursive`: construye un arbol de objetos `Email` desde un JSON
-- `analyze_thread_recursive`: recorre el arbol de correos y clasifica cada uno
-- `load_from_json`: carga un hilo de correo desde un archivo JSON
-- `load_and_evaluate_csv`: carga un dataset CSV etiquetado y calcula metricas de precision
-
-### `reporter.py`
-Genera los informes del analisis:
-- `print_report`: imprime un resumen por pantalla (total, phishing, legitimos)
-- `print_metrics`: calcula e imprime Accuracy, Precision, Recall y F1-score (solo en modo CSV)
-- `export_results`: guarda los resultados en `output/phishing.txt` y `output/legitimos.txt`
-
-### `main.py`
-Punto de entrada del programa. Lee los argumentos de linea de comandos, inicializa los analizadores y el clasificador, carga los correos segun el modo seleccionado y llama al reporter para mostrar y exportar los resultados.
+- Ethan Provencio
+- Josep Maria Poblet
+- Jhoan Lope
 
 ---
 
-## Modos de uso
+## Contexto y problemática
 
-El programa se ejecuta desde la terminal con uno de estos modos:
+El phishing es una de las amenazas de ciberseguridad más extendidas en la actualidad. Consiste en el envío de correos fraudulentos que suplantan la identidad de entidades de confianza con el objetivo de robar credenciales o instalar malware. Según el informe Verizon DBIR, más del 36% de las brechas de seguridad corporativas tienen su origen en correos de phishing.
+
+Los sistemas de detección clásicos basados en listas negras o palabras clave prohibidas presentan dos limitaciones críticas: quedan obsoletos en horas porque los atacantes cambian constantemente sus dominios y vocabulario, y son costosos de mantener manualmente. Phishguard nace para resolver esta problemática usando un modelo de lenguaje capaz de entender el contexto semántico del correo, detectando patrones de phishing aunque el atacante cambie las palabras o el dominio.
+
+---
+
+## Funcionalidades principales
+
+- Clasificación de correos como Phishing o Legítimo con el modelo DistilBERT v2.4.1 (99.58% de precisión oficial).
+- Análisis de hilos de correo con respuestas anidadas de forma recursiva.
+- Tres modos de entrada: archivos .eml, hilos JSON y datasets CSV etiquetados.
+- Limpieza automática de etiquetas HTML del cuerpo antes de clasificar.
+- Extracción de URLs y nombres de adjuntos como evidencia adicional.
+- Cálculo de métricas de precisión (accuracy, precision, recall, F1-score) en modo CSV.
+- Exportación automática de resultados a `output/phishing.txt` y `output/legitimos.txt`.
+- Soporte automático de GPU (CUDA) y CPU.
+- Motor de IA intercambiable: cambiar una línea actualiza todo el clasificador.
+
+---
+
+## Dependencias y cómo instalar
+
+Requisitos: Python 3.10 o superior.
+
+### Sin GPU (CPU únicamente, ~200MB)
+
+```bash
+pip install -r requirements.txt
+```
+
+### Con GPU NVIDIA (CUDA, ~2GB)
+
+```bash
+pip install -r requirements-gpu.txt
+```
+
+> La primera ejecución descarga el modelo automáticamente (~270MB desde HuggingFace).
+> Las ejecuciones siguientes lo cargan desde la caché local.
+
+---
+
+## Uso de POO
+
+El proyecto aplica los siguientes principios de Programación Orientada a Objetos:
+
+**Encapsulación:** Cada módulo oculta su lógica interna y expone solo los métodos necesarios. `PhishingClassifier` encapsula completamente el funcionamiento de DistilBERT; el resto del sistema solo llama a `predict(texto)`.
+
+**Herencia y polimorfismo:** `analyzers.py` implementa una jerarquía de clases con `BaseAnalyzer` como clase base abstracta y tres subclases concretas: `TextAnalyzer`, `AttachmentAnalyzer` y `URLAnalyzer`. En `loader.py` se itera sobre una lista de analizadores llamando a `analyze()` en cada uno sin distinguir el tipo concreto, delegando la lógica específica a cada subclase.
+
+**Recursividad con objetos:** La clase `Email` contiene una lista de objetos `Email` en su atributo `replies`, formando un árbol recursivo que representa los hilos de conversación. Las funciones `load_email_recursive()` y `analyze_thread_recursive()` recorren este árbol llamándose a sí mismas.
+
+**Separación de responsabilidades:** Cada módulo tiene una única responsabilidad bien definida: `models.py` (datos), `email_parser.py` (lectura .eml), `analyzers.py` (extracción de texto), `classifier.py` (IA), `loader.py` (carga y análisis), `reporter.py` (informes), `main.py` (coordinación).
+
+---
+
+## Instrucciones de ejecución
+
+```bash
+# Modo JSON (por defecto, usa data/emails.json)
+python main.py
+
+# Modo EML (correos reales de una carpeta)
+python main.py --eml data/emails/spam/
+
+# Modo JSON con ruta explícita
+python main.py --json data/emails.json
+
+# Modo CSV (dataset etiquetado con métricas de precisión)
+python main.py --csv data/CEAS_08.csv
+```
+
+Los resultados se guardan automáticamente en:
 
 ```
-python main.py                          # modo JSON (por defecto, usa data/emails.json)
-python main.py --eml  data/emails/      # carpeta con archivos .eml reales
-python main.py --json data/emails.json  # archivo JSON con hilo de correos
-python main.py --csv  data/dataset.csv  # dataset CSV etiquetado (calcula metricas)
+output/
+├── phishing.txt    # correos clasificados como phishing
+└── legitimos.txt   # correos clasificados como legítimos
 ```
 
 ---
 
-## Flujo de ejecucion
+## Vídeo de presentación
 
-```
-main.py
-   |
-   |-- 1. Crea los analizadores: TextAnalyzer, AttachmentAnalyzer, URLAnalyzer
-   |
-   |-- 2. Carga el modelo DistilBERT (classifier.py)
-   |       Si es la primera vez, descarga ~270MB desde HuggingFace
-   |
-   |-- 3. Lee los argumentos y carga los correos segun el modo:
-   |
-   |       --eml   --> email_parser.py  --> lista de objetos Email
-   |       --json  --> loader.py        --> arbol de objetos Email (recursivo)
-   |       --csv   --> loader.py        --> lista de correos del CSV
-   |
-   |-- 4. Analiza y clasifica cada correo:
-   |
-   |       Para cada Email:
-   |         TextAnalyzer     --> texto limpio del asunto + cuerpo
-   |         AttachmentAnalyzer --> nombres de adjuntos
-   |         URLAnalyzer      --> URLs del cuerpo
-   |         Los tres textos se combinan en uno solo
-   |         classifier.predict(texto) --> "Phishing" o "Legitimo" + confianza
-   |
-   |-- 5. Genera el informe:
-   |
-   |       reporter.print_report()   --> resumen por pantalla
-   |       reporter.print_metrics()  --> metricas (solo modo CSV)
-   |       reporter.export_results() --> output/phishing.txt y output/legitimos.txt
-```
+[Enlace al vídeo]
 
-    └── legitimos.txt    # correos clasificados como legitimos
-```
+---
+
+## Uso de IA en el desarrollo
+
+Hemos utilizado inteligencia artificial como apoyo durante el desarrollo del proyecto, especialmente en el módulo `analyzers.py`.
+
+Nosotros desarrollamos el diseño inicial de las clases `BaseAnalyzer`, `TextAnalyzer`, `AttachmentAnalyzer` y `URLAnalyzer` con asistencia de la IA, que nos ayudó a implementar la limpieza de HTML.
+
+El resto de módulos (`classifier.py`, `loader.py`, `reporter.py`, `main.py`, `models.py`, `email_parser.py`) fueron desarrollados principalmente por nosotros. La IA se utilizó únicamente como apoyo puntual para resolver dudas concretas.
+
+---
+
+## Evolución del enfoque de clasificación
+
+Durante el desarrollo fuimos probando distintos enfoques hasta encontrar una solución que funcionara bien con correos reales y que pudiera adaptarse a técnicas modernas de phishing.
+
+### Etapa 1 — Reglas manuales (descartado)
+
+El primer metodo que probamos fue un sistema basado en reglas manuales: listas de palabras sospechosas, dominios maliciosos conocidos y extensiones de archivos peligrosas.
+
+Aunque era sencillo de implementar, pronto vimos sus limitaciones. Para cubrir suficientes casos necesitábamos demasiadas reglas y el sistema era difícil de mantener. Además, aparecían muchos falsos positivos y falsos negativos. Los ataques de phishing cambian constantemente y los atacantes modifican el lenguaje, los dominios y la estructura de los correos, así que cualquier lista de reglas quedaba desactualizada muy rápido.
+
+### Etapa 2 — Machine Learning clásico con GBT (descartado)
+
+Después intentamos utilizar Machine Learning clásico entrenando un modelo de Gradient Boosting Trees (GBT) con scikit-learn. Para ello extraíamos características manualmente de los correos, como el número de URLs sospechosas, palabras clave detectadas o tipos de archivos adjuntos.
+
+Los resultados no fueron los esperados. El principal problema era la calidad y antigüedad de los datasets públicos disponibles para entrenamiento. Muchos de ellos, como CEAS_08 o SpamAssassin, contienen correos de 2008 o incluso anteriores. El phishing actual utiliza técnicas muy diferentes, especialmente en la forma de redactar los mensajes y evitar la detección, por lo que el modelo no conseguía clasificar correctamente muchos correos modernos.
+
+### Etapa 3 — Deep Learning con modelos preentrenados (solución definitiva)
+
+Finalmente decidimos utilizar modelos de deep learning preentrenados para clasificación de phishing. Este enfoque nos permitió aprovechar modelos ya entrenados con grandes cantidades de texto y mucho más capaces de adaptarse a variaciones modernas en los correos.
+
+Probamos cuatro modelos distintos de HuggingFace y comparamos su rendimiento utilizando los mismos datasets y métricas. Los resultados fueron considerablemente mejores que en los enfoques anteriores, especialmente en capacidad de detección y reducción de falsos positivos.
+
+---
+
+| Modelo | Tamaño | Accuracy | F1 |
+|---|---|---|---|
+| cybersectony/distilbert_v2.1 | 270MB | 84.12% | 84.75% |
+| ElSlay/BERT-Phishing-Email-Model | 400MB | 85.81% | 86.59% |
+| ealvaradob/bert-finetuned-phishing | 1.3GB | 88.38% | 89.28% |
+| **cybersectony/distilbert_v2.4.1** | **270MB** | **93.33%** | **93.33%** |
+
+El modelo elegido fue `cybersectony/phishing-email-detection-distilbert_v2.4.1` por tener la mejor relación entre peso y rendimiento, consigue el mejor F1-score con solo 270MB, siendo además el más rápido de ejecutar.
