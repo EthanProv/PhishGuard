@@ -18,56 +18,56 @@ from reporter  import print_report, print_metrics, export_results
 if __name__ == "__main__":
 
     # Inicializar los tres analizadores de texto
-    analyzers = [
+    analyzers = [                                                                                                            #O(1)
         TextAnalyzer(),
         AttachmentAnalyzer(),
         URLAnalyzer()
     ]
 
     # Cargar el clasificador DistilBERT
-    classifier = PhishingClassifier()
+    classifier = PhishingClassifier()                                                                                        #O(1)
 
     # Parsear argumentos de linea de comandos
-    parser = argparse.ArgumentParser(prog="PhishGuard")
-    group  = parser.add_mutually_exclusive_group()
-    group.add_argument("--eml",  metavar="FOLDER", help="Carpeta con archivos .eml")
-    group.add_argument("--csv",  metavar="FILE",   help="Dataset CSV etiquetado")
-    group.add_argument("--json", metavar="FILE",   help="Archivo JSON con hilo de correos")
-    args = parser.parse_args()
+    parser = argparse.ArgumentParser(prog="PhishGuard")                                                                      #O(1)
+    group  = parser.add_mutually_exclusive_group()                                                                           #O(1)
+    group.add_argument("--eml",  metavar="FOLDER", help="Carpeta con archivos .eml")                                         #O(1)
+    group.add_argument("--csv",  metavar="FILE",   help="Dataset CSV etiquetado")                                            #O(1)
+    group.add_argument("--json", metavar="FILE",   help="Archivo JSON con hilo de correos")                                  #O(1)
+    args = parser.parse_args()                                                                                               #O(1)
 
-    results = []
+    results = []                                                                                                            #O(1)
 
-    if args.csv:
-        print(f"\n[PhishGuard] Modo: CSV etiquetado -> '{args.csv}'")
-        results = load_and_evaluate_csv(args.csv, classifier, analyzers)
-    else:
-        if args.eml:
-            print(f"\n[PhishGuard] Modo: carpeta EML -> '{args.eml}'")
-            emails_to_analyze = parse_eml_folder(args.eml)
-        elif args.json:
-            print(f"\n[PhishGuard] Modo: JSON -> '{args.json}'")
-            emails_to_analyze = load_from_json(args.json)
-        else:
-            print("\n[PhishGuard] Modo: JSON (por defecto) -> 'data/emails.json'")
-            print("  Consejo: usa --eml <carpeta>, --csv <archivo> o --json <archivo>")
-            emails_to_analyze = load_from_json("data/emails.json")
+    if args.csv:                                                                                                            #O(1)
+        print(f"\n[PhishGuard] Modo: CSV etiquetado -> '{args.csv}'")                                                       #O(1)
+        results = load_and_evaluate_csv(args.csv, classifier, analyzers)                                                    #O(1)
+    else:                                                                                                                   #O(1)
+        if args.eml:                                                                                                        #O(1)
+            print(f"\n[PhishGuard] Modo: carpeta EML -> '{args.eml}'")                                                      #O(1)
+            emails_to_analyze = parse_eml_folder(args.eml)                                                                  #O(1)
+        elif args.json:                                                                                                     #O(1)
+            print(f"\n[PhishGuard] Modo: JSON -> '{args.json}'")                                                            #O(1)
+            emails_to_analyze = load_from_json(args.json)                                                                   #O(1)
+        else:                                                                                                               #O(1)
+            print("\n[PhishGuard] Modo: JSON (por defecto) -> 'data/emails.json'")                                          #O(1)
+            print("  Consejo: usa --eml <carpeta>, --csv <archivo> o --json <archivo>")                                     #O(1)
+            emails_to_analyze = load_from_json("data/emails.json")                                                          #O(1)
 
-        if not emails_to_analyze:
-            print("[PhishGuard] No hay correos para analizar. Saliendo.")
-            sys.exit(0)
+        if not emails_to_analyze:                                                                                           #O(1)
+            print("[PhishGuard] No hay correos para analizar. Saliendo.")                                                   #O(1)
+            sys.exit(0)                                                                                                     #O(1)
 
-        for email_obj in emails_to_analyze:
-            analyze_thread_recursive(email_obj, analyzers, classifier, results)
+        for email_obj in emails_to_analyze:                                                                                 #O(n)
+            analyze_thread_recursive(email_obj, analyzers, classifier, results)                                             #O(1)
 
-    if not results:
-        print("[PhishGuard] No hay correos para analizar. Saliendo.")
-        sys.exit(0)
+    if not results:                                                                                                         #O(1)
+        print("[PhishGuard] No hay correos para analizar. Saliendo.")                                                       #O(1)
+        sys.exit(0)                                                                                                         #O(1)
 
     # Mostrar resumen y metricas
-    print_report(results)
-    print_metrics(results)
+    print_report(results)                                                                                                    #O(1)
+    print_metrics(results)                                                                                                   #O(1)
 
     # Exportar resultados a ficheros
-    export_results(results)
+    export_results(results)                                                                                                #O(1)
 
 #T(n)= 1 + 3 +1 +1 +1 +1 +1 +1 +1 +1 max(2,max(2,3,3)+ max(2) + 4n) + 2 +1 +1 +1 --> T(n)= 12 + 10 +4n +5 --> T(n)= 27 + 4n
