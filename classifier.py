@@ -24,7 +24,7 @@ class PhishingClassifier:
 
     def __init__(self):
         print("[Clasificador] Cargando modelo de IA...")
-        print("[Clasificador] La primera vez puede tardar porque descarga el modelo.")
+        print("[Clasificador] La primera vez puede tardar porque descarga el modelo.") #Depende de la primera vez o no va ir mas lento
 
         if torch.cuda.is_available():
             device = 0
@@ -50,7 +50,7 @@ class PhishingClassifier:
         Clasifica un texto como Phishing o Legitimo.
         Complejidad: O(n), siendo n el numero de etiquetas que devuelve el modelo.
         """
-        scores = self.pipeline(text)[0]
+        scores = self.pipeline(text)[0] #Esta cosa nos digo la IA para que funcionara -_> Hace que  da el primer resultado que devuelve.
 
         phishing_score = 0.0
         legit_score = 0.0

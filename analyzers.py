@@ -16,12 +16,12 @@ class BaseAnalyzer(ABC):
     """
 
     @abstractmethod
-    def get_name(self):
-        pass
+    def get_name(self): #O(1)
+        pass #O(1)
 
     @abstractmethod
-    def analyze(self, email):
-        pass
+    def analyze(self, email): #O(1
+        pass #O(1)
 
 '''
 T(n) = 1+1
