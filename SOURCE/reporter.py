@@ -197,4 +197,4 @@ def export_results(results, output_dir="output"):
 
     print(f"[PhishGuard] Resultados exportados en '{output_dir}/'")      #0(1)
     
-#T(n)= 3 + (n*2) + 1 + (n*5*n*2) + 1 -> T(n)= 4 + 2n + n^2 --> T(n)= 4 + 5n³
+#T(n)= 3 + (n*2) + 1 + (n*5*n*2) + 1 -> T(n)= 4 + 2n + n^2
