@@ -137,14 +137,14 @@ def get_real_label(row):
 
     return "Legitimo"
 
-#T(n)= O(5)
+#T(n)= 5
 
 def load_and_evaluate_csv(csv_path, classifier, analyzers):
     """
     Lee un CSV etiquetado y clasifica cada correo.
     Complejidad: O(n), porque procesa las filas del CSV una vez.
     """
-    if not os.path.exists(csv_path):
+    if not os.path.exists(csv_path):                                            
         print(f"[PhishGuard] Error: archivo no encontrado -> '{csv_path}'")
         sys.exit(1)
 
@@ -194,4 +194,4 @@ def load_and_evaluate_csv(csv_path, classifier, analyzers):
     return results
 
 
-#T(n)=3+1+1+1+2+1+1+1 + n(1+1+1+1+1+1+3+8+2) --> T(n)= 11 + 19n
+#T(n)= 11 + (n*)+ 1 ----3+1+1+1+2+1+1+1 + n(1+1+1+1+1+1+3+8+2) --> T(n)= 11 + 19n
