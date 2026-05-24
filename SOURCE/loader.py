@@ -144,38 +144,38 @@ def load_and_evaluate_csv(csv_path, classifier, analyzers):
     Lee un CSV etiquetado y clasifica cada correo.
     Complejidad: O(n), porque procesa las filas del CSV una vez.
     """
-    if not os.path.exists(csv_path):                                            
-        print(f"[PhishGuard] Error: archivo no encontrado -> '{csv_path}'")
-        sys.exit(1)
+    if not os.path.exists(csv_path):                                                #O(1)                                            
+        print(f"[PhishGuard] Error: archivo no encontrado -> '{csv_path}'")         #O(1)   
+        sys.exit(1)                                                                #O(1)
 
-    results = []
+    results = []                                                                    #O(1)
 
-    csv.field_size_limit(10_000_000)
+    csv.field_size_limit(10_000_000)                                                #O(1)
 
-    with open(csv_path, "r", encoding="utf-8", errors="ignore") as csv_file:
-        reader = csv.DictReader(csv_file)
-        rows = list(reader)
+    with open(csv_path, "r", encoding="utf-8", errors="ignore") as csv_file:        #O(1)
+        reader = csv.DictReader(csv_file)                                            #O(1)
+        rows = list(reader)                                                        #O(1)
 
-    total = len(rows)
-    print(f"[PhishGuard] Cargados {total} correos del CSV.")
-    print("[PhishGuard] Clasificando...\n")
+    total = len(rows)                                                                #O(1)
+    print(f"[PhishGuard] Cargados {total} correos del CSV.")                        #O(1)
+    print("[PhishGuard] Clasificando...\n")                                        #O(1)
 
-    for index, row in enumerate(rows, 1):
-        text = get_text_from_row(row)
-        true_label = get_real_label(row)
+    for index, row in enumerate(rows, 1):                                            #O(N)
+        text = get_text_from_row(row)                                                #O(1)
+        true_label = get_real_label(row)                                            #O(1)
 
-        if not text.strip():
-            continue
+        if not text.strip():                                                        #O(1)
+            continue                                                                #O(1)
 
-        clean_text = clean_csv_text(text)
-        prediction, explanation, confidence = classifier.predict(clean_text)
+        clean_text = clean_csv_text(text)                                            #O(1)
+        prediction, explanation, confidence = classifier.predict(clean_text)        #O(1)
 
-        if len(clean_text) > 60:
-            subject = clean_text[:60] + "..."
-        else:
-            subject = clean_text
+        if len(clean_text) > 60:                                                    #O(1)
+            subject = clean_text[:60] + "..."                                        #O(1)
+        else:                                                                        #O(1)
+            subject = clean_text                                                    #O(1)
 
-        result = {
+        result = {                                                                    #O(1)
             "email_id": str(index).zfill(5),
             "subject": subject,
             "sender": "CSV",
@@ -186,12 +186,12 @@ def load_and_evaluate_csv(csv_path, classifier, analyzers):
             "true_label": true_label
         }
 
-        results.append(result)
+        results.append(result)                                                        #O(1)
 
-        if index % 100 == 0:
-            print(f"  Progreso: {index}/{total} correos clasificados...")
+        if index % 100 == 0:                                                        #O(1)
+            print(f"  Progreso: {index}/{total} correos clasificados...")            #O(1)
 
-    return results
+    return results                                                                    #O(1)
 
 
 #T(n)= 11 + (n*)+ 1 ----3+1+1+1+2+1+1+1 + n(1+1+1+1+1+1+3+8+2) --> T(n)= 11 + 19n
