@@ -62,42 +62,42 @@ class AttachmentAnalyzer(BaseAnalyzer):
     """Analiza los nombres de los archivos adjuntos"""
 
     def get_name(self):
-        return "Adjuntos"
+        return "Adjuntos"    #O(1)
 
     def analyze(self, email):
         """
         Devuelve los nombres de los adjuntos
         Complejidad: O(n), porque recorre la lista de adjuntos una vez
         """
-        filenames = []
+        filenames = []        #O(1)
 
-        for attachment in email.attachments:
-            filename = attachment.get("filename", "")
+        for attachment in email.attachments:            #O(N)
+            filename = attachment.get("filename", "")        #O(1)
 
-            if filename:
-                filenames.append(filename)
+            if filename:                    #O(1)
+                filenames.append(filename)    #O(1)
 
-        final_text = " ".join(filenames)
+        final_text = " ".join(filenames)    #O(1)
 
-        return final_text
+        return final_text            #O(1)
     #T(n)= 1 + (1 +n*1) --> T(n) = 2+n
 
 
 class URLAnalyzer(BaseAnalyzer):
     """Busca enlaces dentro del cuerpo del correo"""
 
-    URL_PATTERN = re.compile(r"https?://[^\s<>\"']+|www\.[^\s<>\"']+")
+    URL_PATTERN = re.compile(r"https?://[^\s<>\"']+|www\.[^\s<>\"']+")            #O(1)
 
     def get_name(self):
-        return "Enlaces"
+        return "Enlaces"    #O(1)
 
     def analyze(self, email):
         """
         Devuelve las URLs encontradas
         Complejidad: O(n), porque busca dentro del texto del correo
         """
-        urls_found = self.URL_PATTERN.findall(email.body)
-        final_text = " ".join(urls_found)
+        urls_found = self.URL_PATTERN.findall(email.body)    #O(1)
+        final_text = " ".join(urls_found)    #O(1)
 
-        return final_text
+        return final_text    #O(1)
     #T(n)= 1 +1
