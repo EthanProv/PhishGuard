@@ -14,26 +14,26 @@ def decode_header_value(raw_value):
     Convierte una cabecera del correo a texto normal.
     Complejidad: O(n), porque recorre las partes decodificadas.
     """
-    if not raw_value:
-        return ""
+    if not raw_value:                                                                                        #O(1)    
+        return ""                                                                                            #O(1)
 
-    decoded_parts = []
+    decoded_parts = []                                                                                        #O(1)
 
-    for part, charset in decode_header(raw_value):
-        if isinstance(part, bytes):
-            try:
-                decoded_text = part.decode(charset or "utf-8", errors="replace")
-            except (LookupError, UnicodeDecodeError):
-                decoded_text = part.decode("utf-8", errors="replace")
-        else:
-            decoded_text = str(part)
+    for part, charset in decode_header(raw_value):                                                            #O(N)
+        if isinstance(part, bytes):                                                                           #O(1)
+            try:                                                                                              #O(1)
+                decoded_text = part.decode(charset or "utf-8", errors="replace")                              #O(1)
+            except (LookupError, UnicodeDecodeError):                                                        #O(1)
+                decoded_text = part.decode("utf-8", errors="replace")                                        #O(1)
+        else:                                                                                                    #O(1)
+            decoded_text = str(part)                                                                            #O(1)
 
-        decoded_parts.append(decoded_text)
+        decoded_parts.append(decoded_text)                                                                    #O(1)
 
-    final_text = " ".join(decoded_parts)
-    final_text = final_text.strip()
+    final_text = " ".join(decoded_parts)                                                                    #O(1)
+    final_text = final_text.strip()                                                                            #O(1)
 
-    return final_text
+    return final_text                                                                                        #O(1)
     #T(n) = 2 + 1 + n( max(1+1+2)1) +1 = T(n)= 3 + 4n +1 = 4 + 4n
 
 
@@ -42,40 +42,40 @@ def extract_body(message):
     Extrae el cuerpo del correo.
     Complejidad: O(n), porque puede recorrer todas las partes del mensaje.
     """
-    body_parts = []
+    body_parts = []                                                                                        #O(1)
 
-    if message.is_multipart():
-        for part in message.walk():
-            content_type = part.get_content_type()
-            disposition = str(part.get("Content-Disposition", ""))
+    if message.is_multipart():                                                                            #O(1)
+        for part in message.walk():                                                                        #O(N)
+            content_type = part.get_content_type()                                                        #O(1)
+            disposition = str(part.get("Content-Disposition", ""))                                        #O(1)
 
-            is_text = content_type == "text/plain"
-            is_attachment = "attachment" in disposition
+            is_text = content_type == "text/plain"                                                        #O(1)
+            is_attachment = "attachment" in disposition                                                    #O(1)
 
-            if is_text and not is_attachment:
-                try:
-                    charset = part.get_content_charset() or "utf-8"
-                    payload = part.get_payload(decode=True)
-                    text = payload.decode(charset, errors="replace")
-                except Exception:
-                    text = part.get_payload(decode=False) or ""
+            if is_text and not is_attachment:                                                            #O(1)
+                try:                                                                                      #O(1)
+                    charset = part.get_content_charset() or "utf-8"                                        #O(1)
+                    payload = part.get_payload(decode=True)                                            #O(1)
+                    text = payload.decode(charset, errors="replace")                                        #O(1)
+                except Exception:                                                                          #O(1)
+                    text = part.get_payload(decode=False) or ""                                            #O(1)
 
-                body_parts.append(text)
-    else:
-        try:
+                body_parts.append(text)                                                                    #O(1)
+    else:                                                                                                    #O(1)
+        try:                                                                                               #O(1)
             charset = message.get_content_charset() or "utf-8"
-            payload = message.get_payload(decode=True)
+            payload = message.get_payload(decode=True)                                                    #O(1)
 
-            if payload:
-                text = payload.decode(charset, errors="replace")
-                body_parts.append(text)
-        except Exception:
-            text = str(message.get_payload() or "")
-            body_parts.append(text)
+            if payload:                                                                                    #O(1)
+                text = payload.decode(charset, errors="replace")                                            #O(1)
+                body_parts.append(text)                                                                    #O(1)
+        except Exception:                                                                                  #O(1)
+            text = str(message.get_payload() or "")                                                        #O(1)
+            body_parts.append(text)                                                                        #O(1)
 
-    body = "\n".join(body_parts)
+    body = "\n".join(body_parts)                                                                            #O(1)
 
-    return body
+    return body                                                                                            #O(1)
 #T(n)= 1 + max(1+n*(1+1+max(4)),4)) = T(n)= 1 + 1+7n
 
 
@@ -84,66 +84,66 @@ def extract_attachments(message):
     Extrae los nombres de los adjuntos.
     Complejidad: O(n), porque revisa las partes del mensaje.
     """
-    attachments = []
+    attachments = []    #O(1)
 
-    for part in message.walk():
-        disposition = str(part.get("Content-Disposition", ""))
-        filename_raw = part.get_filename()
+    for part in message.walk():    #O(N)
+        disposition = str(part.get("Content-Disposition", ""))    #O(1)
+        filename_raw = part.get_filename()    #O(1)
 
-        if filename_raw and "attachment" in disposition:
-            filename = decode_header_value(filename_raw)
-            attachments.append({"filename": filename})
+        if filename_raw and "attachment" in disposition:        #O(2)
+            filename = decode_header_value(filename_raw)        #O(1)
+            attachments.append({"filename": filename})    #O(1)
 
-    return attachments
+    return attachments                    #O(1)
 
 #T(n)= 1 + n*1+1+max(1+1+1+1)= T(n)= 1 +6n
 
 
 def extract_sender_info(message):
     """Extrae el remitente y la fecha del correo."""
-    from_raw = message.get("From", "unknown@unknown.com")
-    from_text = decode_header_value(from_raw)
+    from_raw = message.get("From", "unknown@unknown.com")    #O(1)
+    from_text = decode_header_value(from_raw)        #O(1)
 
-    date = message.get("Date", "")
+    date = message.get("Date", "")        #O(1)
 
-    match = re.search(r"[\w.\-+]+@[\w.\-]+", from_text)
+    match = re.search(r"[\w.\-+]+@[\w.\-]+", from_text)    #O(1)
 
-    if match:
-        sender = match.group(0)
-    else:
-        sender = from_text
+    if match:    #O(1)
+        sender = match.group(0)    #O(1)
+    else:        #O(1)
+        sender = from_text        #O(1)
 
-    headers = {
+    headers = {                    #O(1)
         "sender": sender,
         "date": date
     }
 
-    return headers
+    return headers            #O(1)
 #T(n)= 1+1+1+1+2 = T(n)=6
 
 
 def parse_eml_file(filepath, email_id=None):
     """Lee un archivo .eml y devuelve un objeto Email."""
-    if not os.path.exists(filepath):
-        raise FileNotFoundError(f"Archivo no encontrado: {filepath}")
+    if not os.path.exists(filepath):                                    #O(1)
+        raise FileNotFoundError(f"Archivo no encontrado: {filepath}")    #O(1)
 
-    with open(filepath, "r", encoding="utf-8", errors="replace") as eml_file:
-        message = message_from_file(eml_file, policy=email.policy.compat32)
+    with open(filepath, "r", encoding="utf-8", errors="replace") as eml_file:    #O(1)
+        message = message_from_file(eml_file, policy=email.policy.compat32)    #O(1)
 
-    if email_id:
-        final_email_id = email_id
-    else:
-        basename = os.path.basename(filepath)
-        final_email_id = os.path.splitext(basename)[0]
+    if email_id:    #O(1)
+        final_email_id = email_id    #O(1)
+    else:    #O(1)
+        basename = os.path.basename(filepath)    #O(1)
+        final_email_id = os.path.splitext(basename)[0]    #O(1)
 
-    subject_raw = message.get("Subject", "(sin asunto)")
-    subject = decode_header_value(subject_raw)
+    subject_raw = message.get("Subject", "(sin asunto)")    #O(1)
+    subject = decode_header_value(subject_raw)    #O(1)
 
-    headers = extract_sender_info(message)
-    body = extract_body(message)
-    attachments = extract_attachments(message)
+    headers = extract_sender_info(message)    #O(1)
+    body = extract_body(message)                #O(1)
+    attachments = extract_attachments(message)    #O(1)
 
-    correo = Email(
+    correo = Email(            #O(1)
         final_email_id,
         headers,
         subject,
@@ -151,7 +151,7 @@ def parse_eml_file(filepath, email_id=None):
         attachments
     )
 
-    return correo
+    return correo        #O(1)
 #T(n)= 1 + 4 +1 +1 +1 +1 +1 +1 +5 --> T(n)=16
 
 
@@ -160,39 +160,39 @@ def parse_eml_folder(folder_path):
     Lee una carpeta con correos .eml.
     Complejidad: O(n), porque recorre los archivos de la carpeta.
     """
-    if not os.path.isdir(folder_path):
-        raise NotADirectoryError(f"Carpeta no encontrada: {folder_path}")
+    if not os.path.isdir(folder_path):                                                #O(1)
+        raise NotADirectoryError(f"Carpeta no encontrada: {folder_path}")            #O(1)
 
-    emails = []
-    eml_files = []
+    emails = []        #O(1)
+    eml_files = []    #O(1)
 
-    for filename in os.listdir(folder_path):
-        is_eml = filename.lower().endswith(".eml")
-        looks_like_spamassassin_file = filename.count(".") == 1
-        is_windows_extra_file = filename.endswith(":Zone.Identifier")
+    for filename in os.listdir(folder_path):                                                    #O(N)
+        is_eml = filename.lower().endswith(".eml")                                            #O(1)
+        looks_like_spamassassin_file = filename.count(".") == 1                            #O(1)
+        is_windows_extra_file = filename.endswith(":Zone.Identifier")                        #O(1)
 
-        if is_eml or (looks_like_spamassassin_file and not is_windows_extra_file):
-            eml_files.append(filename)
+        if is_eml or (looks_like_spamassassin_file and not is_windows_extra_file):            #O(1)
+            eml_files.append(filename)                                                        #O(1)
 
-    eml_files.sort()
+    eml_files.sort()                                                        #O(1)
 
-    if not eml_files:
-        print(f"[Parser] No se encontraron correos en '{folder_path}'")
-        return emails
+    if not eml_files:                                                                                    #O(1)
+        print(f"[Parser] No se encontraron correos en '{folder_path}'")                    #O(1)
+        return emails                                                            #O(1)
 
-    total = len(eml_files)
-    print(f"[Parser] Encontrados {total} correo(s) en '{folder_path}'")
+    total = len(eml_files)                                                            #O(1)
+    print(f"[Parser] Encontrados {total} correo(s) en '{folder_path}'")                            #O(1)
 
-    for filename in eml_files:
-        filepath = os.path.join(folder_path, filename)
+    for filename in eml_files:                                #O(N)
+        filepath = os.path.join(folder_path, filename)    #O(1)
 
-        try:
-            correo = parse_eml_file(filepath)
-            emails.append(correo)
-            print(f"[Parser] Parseado: {filename}")
-        except Exception as error:
-            print(f"[Parser] Error al parsear {filename}: {error}")
+        try:                                            #O(1)
+            correo = parse_eml_file(filepath)            #O(1)
+            emails.append(correo)                                        #O(1)
+            print(f"[Parser] Parseado: {filename}")            #O(1)
+        except Exception as error:                                    #O(1)
+            print(f"[Parser] Error al parsear {filename}: {error}")            #O(1)
 
-    return emails
+    return emails                                            #O(1)
 
 #T(n)= 2 + 1 +1 + n* 1+ 3 + 1 + n*1+4 --> T(n)= 4 +5n +5n --> T(n)= 4+ 10n
