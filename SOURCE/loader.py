@@ -31,7 +31,10 @@ def load_email_recursive(data):
 
     return correo                                        #O(1)
 
-#T(n) = 2 + (n*2) +1 --> T(n)= 3 + 2n
+# T(n) = c * n
+# O(n) = O(n)
+# Θ(n) = Θ(n)
+# Promedio = O(n)
 
 
 def analyze_thread_recursive(correo, analyzers, classifier, results):
@@ -73,8 +76,15 @@ def analyze_thread_recursive(correo, analyzers, classifier, results):
 
     for reply in correo.replies:                                                 #O(n)
         analyze_thread_recursive(reply, analyzers, classifier, results)          #O(1)
-    #T(n)= 1 + (n*3) + 1 + (n*2) + 4 + (n*1) --> T(n)= 6n + 6
-
+# T(n) = c * n * a
+# O(n * a) = O(n * a)
+# Θ(n * a) = Θ(n * a)
+# Promedio = O(n * a)
+#
+# Si el número de analizadores es fijo:
+# O(n)
+# Θ(n)
+# Promedio = O(n)
 
 def load_from_json(filepath):
     """
@@ -96,7 +106,10 @@ def load_from_json(filepath):
         emails.append(correo)                                                  #O(1)
 
     return emails                                                              #O(1)
-#T(n)= 4 + (n*2) + 1 --> T(n)= 5 + 2n
+# T(n) = c * n
+# O(n) = O(n)
+# Θ(n) = Θ(n)
+# Promedio = O(n)
 
 def clean_csv_text(text):
     """
@@ -108,7 +121,10 @@ def clean_csv_text(text):
     text = text.strip()
 
     return text
-#T(n)= O(4)
+# T(m) = c * m
+# O(m) = O(m)
+# Θ(m) = Θ(m)
+# Promedio = O(m)
 
 def get_text_from_row(row):
     """Intenta sacar el texto del correo usando diferentes nombres de columna."""
@@ -125,7 +141,10 @@ def get_text_from_row(row):
             return value                            #O(1)
 
     return ""                                      #O(1)
-#T(n)= 1 + (n*3) + 1 --> T(n)= 2 + 3n
+# T(n) = c (Porque solo hay 3 columnas fijas)
+# O(1) = O(1)
+# Θ(1) = Θ(1)
+# Promedio = O(1)
 
 def get_real_label(row):
     """Convierte la etiqueta del CSV en Phishing o Legitimo."""
@@ -137,7 +156,10 @@ def get_real_label(row):
 
     return "Legitimo"
 
-#T(n)= 5
+# T(n) = c (No hay bucles)
+# O(1) = O(1)
+# Θ(1) = Θ(1)
+# Promedio = O(1)
 
 def load_and_evaluate_csv(csv_path, classifier, analyzers):
     """
@@ -193,5 +215,15 @@ def load_and_evaluate_csv(csv_path, classifier, analyzers):
 
     return results                                                                    #O(1)
 
-
-#T(n)= 11 + (n*)+ 1 ----3+1+1+1+2+1+1+1 + n(1+1+1+1+1+1+3+8+2) --> T(n)= 11 + 19n
+# n = número de correos o filas del CSV
+# m = longitud media del texto de cada correo
+#
+# T(n) = c * n * m
+# O(n * m) = O(n * m)
+# Θ(n * m) = Θ(n * m)
+# Promedio = O(n * m)
+#
+# Si se considera que el tamaño medio del texto y el clasificador son constantes:
+# O(n)
+# Θ(n)
+# Promedio = O(n)
