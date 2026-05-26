@@ -34,7 +34,10 @@ def decode_header_value(raw_value):
     final_text = final_text.strip()                                                                            #O(1)
 
     return final_text                                                                                        #O(1)
-    #T(n) = 2 + 1 + n( max(1+1+2)1) +1 = T(n)= 3 + 4n +1 = 4 + 4n
+   # T(n) = 4 + 4n
+# O(n) = O(n)
+# Θ(n) = Θ(n)
+# Promedio = O(n)
 
 
 def extract_body(message):
@@ -77,6 +80,9 @@ def extract_body(message):
 
     return body                                                                                            #O(1)
 #T(n)= 1 + max(1+n*(1+1+max(4)),4)) = T(n)= 1 + 1+7n
+# O(n) = O(n)
+# Θ(n) = Θ(n)
+# Promedio = O(n)
 
 
 def extract_attachments(message):
@@ -97,12 +103,15 @@ def extract_attachments(message):
     return attachments                    #O(1)
 
 #T(n)= 1 + n*1+1+max(1+1+1+1)= T(n)= 1 +6n
+# O(n) = O(n)
+# Θ(n) = Θ(n)
+# Promedio = O(n)
 
 
 def extract_sender_info(message):
     """Extrae el remitente y la fecha del correo."""
     from_raw = message.get("From", "unknown@unknown.com")    #O(1)
-    from_text = decode_header_value(from_raw)        #O(1)
+    from_text = decode_header_value(from_raw)        #O(n)
 
     date = message.get("Date", "")        #O(1)
 
@@ -119,7 +128,10 @@ def extract_sender_info(message):
     }
 
     return headers            #O(1)
-#T(n)= 1+1+1+1+2 = T(n)=6
+#T(n)= 1+1+1+1+2 = T(n)=6 + n
+# O(n) = O(n)
+# Θ(n) = Θ(n)
+# Promedio = O(n)
 
 
 def parse_eml_file(filepath, email_id=None):
@@ -152,7 +164,12 @@ def parse_eml_file(filepath, email_id=None):
     )
 
     return correo        #O(1)
-#T(n)= 1 + 4 +1 +1 +1 +1 +1 +1 +5 --> T(n)=16
+# T(n) = c * n
+# O(n) = O(n)
+# Θ(n) = Θ(n)
+# Promedio = O(n)
+# Como extract_body() y extract_attachments() pueden recorrer las partes del correo
+
 
 
 def parse_eml_folder(folder_path):
@@ -196,3 +213,6 @@ def parse_eml_folder(folder_path):
     return emails                                            #O(1)
 
 #T(n)= 2 + 1 +1 + n* 1+ 3 + 1 + n*1+4 --> T(n)= 4 +5n +5n --> T(n)= 4+ 10n
+# O(n) = O(n)
+# Θ(n) = Θ(1)
+# Promedio = O(n)

@@ -84,4 +84,7 @@ class PhishingClassifier:
         confidence = round(confidence, 4)            #O(1)
 
         return prediction, explanation, confidence            #O(1)
-    #T(n) = 1 +1 +1 + n(1 +1 max(1+1),1) + 1 +1 +1 +1 max(3) --> T(n)= 3 + 4n + 7 --> T(n)= 10 + 4n
+#T(n) = 1 +1 +1 + n(1 +1 max(1+1),1) + 1 +1 +1 +1 max(3) --> T(n)= 3 + 4n + 7 --> T(n)= 10 + 4n
+# (n)
+# Θ(n)
+# Promedio = O(n)

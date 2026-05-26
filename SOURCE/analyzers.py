@@ -24,7 +24,10 @@ class BaseAnalyzer(ABC):
         pass #O(1)
 
 '''
-T(n) = 1+1
+T(n) = 2+2
+# O(1) = O(1)
+# Θ(1) = Θ(1)
+# Promedio = O(1)
 
 '''
 
@@ -56,7 +59,10 @@ class TextAnalyzer(BaseAnalyzer):
         return f"{subject_clean} {body_clean}" 
         #T(n)= 3
 
-#T(n) = 1 +1 + ( 1+ 3 + 3)
+# T(n) = 3 * n
+# O(n) = O(n)
+# Θ(n) = Θ(n)
+# Promedio = O(n)
 
 class AttachmentAnalyzer(BaseAnalyzer):
     """Analiza los nombres de los archivos adjuntos"""
@@ -80,7 +86,10 @@ class AttachmentAnalyzer(BaseAnalyzer):
         final_text = " ".join(filenames)    #O(1)
 
         return final_text            #O(1)
-    #T(n)= 1 + (1 +n*1) --> T(n) = 2+n
+    #T(n)= 1 + (1 +n*1) --> T(n) = 2+3n
+# O(n) = O(n)
+# Θ(n) = Θ(n)
+# Promedio = O(n)
 
 
 class URLAnalyzer(BaseAnalyzer):
@@ -96,8 +105,11 @@ class URLAnalyzer(BaseAnalyzer):
         Devuelve las URLs encontradas
         Complejidad: O(n), porque busca dentro del texto del correo
         """
-        urls_found = self.URL_PATTERN.findall(email.body)    #O(1)
+        urls_found = self.URL_PATTERN.findall(email.body)    #O(n)
         final_text = " ".join(urls_found)    #O(1)
 
         return final_text    #O(1)
-    #T(n)= 1 +1
+    # T(n) = 2n
+# O(n) = O(n)
+# Θ(n) = Θ(n)
+# Promedio = O(n)

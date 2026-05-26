@@ -107,8 +107,8 @@ def load_from_json(filepath):
 
     return emails                                                              #O(1)
 # T(n) = c * n
-# O(n) = O(n)
-# Θ(n) = Θ(n)
+# O(n)
+#Θ(n)
 # Promedio = O(n)
 
 def clean_csv_text(text):
@@ -121,10 +121,10 @@ def clean_csv_text(text):
     text = text.strip()
 
     return text
-# T(m) = c * m
-# O(m) = O(m)
-# Θ(m) = Θ(m)
-# Promedio = O(m)
+# T(m) = 3 * n
+#  O(n)
+# Θ(n)
+# Promedio = (n)
 
 def get_text_from_row(row):
     """Intenta sacar el texto del correo usando diferentes nombres de columna."""
@@ -142,8 +142,8 @@ def get_text_from_row(row):
 
     return ""                                      #O(1)
 # T(n) = c (Porque solo hay 3 columnas fijas)
-# O(1) = O(1)
-# Θ(1) = Θ(1)
+# O(1)
+# Θ(1)
 # Promedio = O(1)
 
 def get_real_label(row):
@@ -157,14 +157,14 @@ def get_real_label(row):
     return "Legitimo"
 
 # T(n) = c (No hay bucles)
-# O(1) = O(1)
-# Θ(1) = Θ(1)
+#O(1)
+#  Θ(1)
 # Promedio = O(1)
 
 def load_and_evaluate_csv(csv_path, classifier, analyzers):
     """
     Lee un CSV etiquetado y clasifica cada correo.
-    Complejidad: O(n), porque procesa las filas del CSV una vez.
+    
     """
     if not os.path.exists(csv_path):                                                #O(1)                                            
         print(f"[PhishGuard] Error: archivo no encontrado -> '{csv_path}'")         #O(1)   
@@ -174,7 +174,7 @@ def load_and_evaluate_csv(csv_path, classifier, analyzers):
 
     csv.field_size_limit(10_000_000)                                                #O(1)
 
-    with open(csv_path, "r", encoding="utf-8", errors="ignore") as csv_file:        #O(1)
+    with open(csv_path, "r", encoding="utf-8", errors="ignore") as csv_file:        #O(n)
         reader = csv.DictReader(csv_file)                                            #O(1)
         rows = list(reader)                                                        #O(1)
 
@@ -219,8 +219,8 @@ def load_and_evaluate_csv(csv_path, classifier, analyzers):
 # m = longitud media del texto de cada correo
 #
 # T(n) = c * n * m
-# O(n * m) = O(n * m)
-# Θ(n * m) = Θ(n * m)
+# O(n * m)
+#  Θ(n * m)
 # Promedio = O(n * m)
 #
 # Si se considera que el tamaño medio del texto y el clasificador son constantes:

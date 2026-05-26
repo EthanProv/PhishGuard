@@ -180,7 +180,7 @@ def export_results(results, output_dir="output"):
         ("legitimos.txt", "CORREOS LEGITIMOS", legit_results)
     ]                            
 
-    for filename, title, selected_results in files_to_create:            #0(n)
+    for filename, title, selected_results in files_to_create:            #0(2) SOLO DA DOS VUELTAS
         path = os.path.join(output_dir, filename)                        #0(1)
 
         with open(path, "w", encoding="utf-8") as file:                 #0(1)
@@ -197,4 +197,7 @@ def export_results(results, output_dir="output"):
 
     print(f"[PhishGuard] Resultados exportados en '{output_dir}/'")      #0(1)
     
-#T(n)= 3 + (n*2) + 1 + (n*5*n*2) + 1 -> T(n)= 4 + 2n + n^2
+#T(n)= 3 + (n*2) + 1 + (n*5*n*2) + 1 -> T(n)= 4 + 2n 
+# O(n) = O(n)
+# Θ(n) = Θ(n)
+# Promedio = O(n)

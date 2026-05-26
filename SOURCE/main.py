@@ -71,3 +71,6 @@ if __name__ == "__main__":
     export_results(results)                                                                                                #O(1)
 
 #T(n)= 1 + 3 +1 +1 +1 +1 +1 +1 +1 +1 max(2,max(2,3,3)+ max(2) + 4n) + 2 +1 +1 +1 --> T(n)= 12 + 10 +4n +5 --> T(n)= 27 + 4n
+# O(n) = O(n)
+# Θ(n) = Θ(n)
+# Promedio = O(n)

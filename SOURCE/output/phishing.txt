@@ -1,0 +1,284 @@
+PHISHGUARD -- CORREOS DE PHISHING
+=================================================================
+
+[00065]
+Asunto: find the bug
+Remitente: justin.armstrong@acm.org
+Confianza: 51.2%
+  Texto analizado:
+    - TextAnalyzer: find the bug //this function should print all numbers up to 100... void print_nums() { int i; for(i = 0; i < 10l; i++) {
+Explicacion:
+ - El modelo ha dado 51.2% de confianza en phishing
+
+[00067]
+Asunto: Save up to 70% on international calls!
+Remitente: webster@ryanairmail.com
+Confianza: 100.0%
+  Texto analizado:
+    - TextAnalyzer: Save up to 70% on international calls! ........... with our telecoms partner Bumblebee ! Don't get ripped off by expensi
+    - Enlaces: http://www.bumblebeecommunications.com/lowcostcalls/
+Explicacion:
+ - El modelo ha dado 100.0% de confianza en phishing
+
+[00153]
+Asunto: [zzzzteana] Fake bank website cons victims
+Remitente: martin@srv0.ems.ed.ac.uk
+Confianza: 77.8%
+  Texto analizado:
+    - TextAnalyzer: [zzzzteana] Fake bank website cons victims >>From the BBC website - www.bbc.co.uk Tuesday, 8 October, 2002, 09:43 GMT 10
+    - Enlaces: www.bbc.co.uk http://us.click.yahoo.com/RrPZMC/jTmEAA/MVfIAA/7gSolB/TM http://docs.yahoo.com/info/terms/
+Explicacion:
+ - El modelo ha dado 77.8% de confianza en phishing
+
+[00170]
+Asunto: [zzzzteana] "Put this in your stereo and smoke it ... "
+Remitente: solarion@1starnet.com
+Confianza: 97.0%
+  Texto analizado:
+    - TextAnalyzer: [zzzzteana] "Put this in your stereo and smoke it ... " http://www.ouchytheclown.com/welcome.html ----------------------
+    - Enlaces: http://www.ouchytheclown.com/welcome.html http://us.click.yahoo.com/pt6YBB/NXiEAA/MVfIAA/7gSolB/TM http://docs.yahoo.com
+Explicacion:
+ - El modelo ha dado 97.0% de confianza en phishing
+
+[00377]
+Asunto: Er
+Remitente: geege@barrera.org
+Confianza: 92.1%
+  Texto analizado:
+    - TextAnalyzer: Er use this address instead, please. prerogatively, geege
+Explicacion:
+ - El modelo ha dado 92.1% de confianza en phishing
+
+[00380]
+Asunto: SChoolHouseRocks DVD
+Remitente: tomwhore@slack.net
+Confianza: 97.7%
+  Texto analizado:
+    - TextAnalyzer: SChoolHouseRocks DVD Of course they had to do this AFTER we purcahsed these all on vhs, and yes it is now run by the gre
+Explicacion:
+ - El modelo ha dado 97.7% de confianza en phishing
+
+[00421]
+Asunto: Kill Your Gods
+Remitente: tomwhore@slack.net
+Confianza: 100.0%
+  Texto analizado:
+    - TextAnalyzer: Kill Your Gods Hindus mourn 'monkey god' By Omer Farooq BBC reporter in Hyderabad Hundreds of people have attended the f
+Explicacion:
+ - El modelo ha dado 100.0% de confianza en phishing
+
+[00431]
+Asunto: Adam dont job for no one, see.
+Remitente: tomwhore@slack.net
+Confianza: 99.9%
+  Texto analizado:
+    - TextAnalyzer: Adam dont job for no one, see. A groys gesheft zol er hobn mit shroyre vus er hot, zol men bay im nit fregn, un vos men
+Explicacion:
+ - El modelo ha dado 99.9% de confianza en phishing
+
+[00525]
+Asunto: Re[2]: Selling Wedded Bliss (was Re: Ouch...)
+Remitente: lgonze@panix.com
+Confianza: 100.0%
+  Texto analizado:
+    - TextAnalyzer: Re[2]: Selling Wedded Bliss (was Re: Ouch...) > This is getting better and better. You know 3K is utter shite how? I'm n
+Explicacion:
+ - El modelo ha dado 100.0% de confianza en phishing
+
+[00616]
+Asunto: Re: [VoID] a new low on the personals tip...
+Remitente: harley@argote.ch
+Confianza: 90.4%
+  Texto analizado:
+    - TextAnalyzer: Re: [VoID] a new low on the personals tip... Pity. Reading that woman's ad and knowing Rohit for years, they sound like
+Explicacion:
+ - El modelo ha dado 90.4% de confianza en phishing
+
+[00881]
+Asunto: Blatantly stolen from a friend's LJ
+Remitente: bitbitch@magnesium.net
+Confianza: 82.2%
+  Texto analizado:
+    - TextAnalyzer: Blatantly stolen from a friend's LJ Hello Fork, http://www.pimprig.com/sections.php?op=viewarticle&artid=72&page=2 This
+    - Enlaces: http://www.pimprig.com/sections.php?op=viewarticle&artid=72&page=2
+Explicacion:
+ - El modelo ha dado 82.2% de confianza en phishing
+
+[01372]
+Asunto: Re: [SAdev] 2.40: ready for release?
+Remitente: yyyy@spamassassin.taint.org
+Confianza: 93.7%
+  Texto analizado:
+    - TextAnalyzer: Re: [SAdev] 2.40: ready for release? > t/db_based_whitelist.Use of bare ../lib/Mail/SpamAssassin/HTML.pm line 1. Use of
+    - Enlaces: http://www.jabber.com/osdn/xim https://lists.sourceforge.net/lists/listinfo/spamassassin-devel
+Explicacion:
+ - El modelo ha dado 93.7% de confianza en phishing
+
+[01428]
+Asunto: [SACVS] CVS: spamassassin/masses/tenpass - New directory
+Remitente: yyyyason@users.sourceforge.net
+Confianza: 57.8%
+  Texto analizado:
+    - TextAnalyzer: [SACVS] CVS: spamassassin/masses/tenpass - New directory Update of /cvsroot/spamassassin/spamassassin/masses/tenpass In
+    - Enlaces: https://www.inphonic.com/r.asp?r=sourceforge1&refcode1=vs3390 https://lists.sourceforge.net/lists/listinfo/spamassassin-
+Explicacion:
+ - El modelo ha dado 57.7% de confianza en phishing
+
+[01507]
+Asunto: Returned mail: [SACVS] CVS: spamassassin/masses craig-evolve.c.ALTIVEC,NONE,1.1
+    craig-evolve.c,1.8,1.9
+Remitente: MAILER-DAEMON@prodigy.net
+Confianza: 100.0%
+  Texto analizado:
+    - TextAnalyzer: Returned mail: [SACVS] CVS: spamassassin/masses craig-evolve.c.ALTIVEC,NONE,1.1 craig-evolve.c,1.8,1.9 Unable to find us
+Explicacion:
+ - El modelo ha dado 100.0% de confianza en phishing
+
+[01536]
+Asunto: [SAdev] Party in San Francisco tonight
+Remitente: marc@perkel.com
+Confianza: 58.3%
+  Texto analizado:
+    - TextAnalyzer: [SAdev] Party in San Francisco tonight I don't know how make of you are in the Bay Area but EFF is having a benifit part
+    - Enlaces: https://www.inphonic.com/r.asp?r=sourceforge1&refcode1=vs3390 https://lists.sourceforge.net/lists/listinfo/spamassassin-
+Explicacion:
+ - El modelo ha dado 58.3% de confianza en phishing
+
+[01622]
+Asunto: RE: Secure Sofware Key
+Remitente: feltman@pacbell.net
+Confianza: 100.0%
+  Texto analizado:
+    - TextAnalyzer: RE: Secure Sofware Key the only way to insure a safe key is to use all the storage space in the universe. too big to dec
+Explicacion:
+ - El modelo ha dado 100.0% de confianza en phishing
+
+[01709]
+Asunto: [Spambayes] spambayes package?
+Remitente: skip@pobox.com
+Confianza: 61.7%
+  Texto analizado:
+    - TextAnalyzer: [Spambayes] spambayes package? Before we get too far down this road, what do people think of creating a spambayes packag
+Explicacion:
+ - El modelo ha dado 61.7% de confianza en phishing
+
+[01795]
+Asunto: Facts about sex.
+Remitente: gkm@petting-zoo.net
+Confianza: 100.0%
+  Texto analizado:
+    - TextAnalyzer: Facts about sex. Forwarded-by: Flower Did you know that you can tell from the skin whether a person is sexually active o
+Explicacion:
+ - El modelo ha dado 100.0% de confianza en phishing
+
+[01886]
+Asunto: Get your own genome, feed your hypochondria
+Remitente: rssfeeds@spamassassin.taint.org
+Confianza: 99.8%
+  Texto analizado:
+    - TextAnalyzer: Get your own genome, feed your hypochondria URL: http://boingboing.net/#85485739 Date: Not supplied For UK#400,000, a bi
+    - Enlaces: http://boingboing.net/#85485739 http://timesofindia.indiatimes.com/cms.dll/articleshow?artid=23099123 http://www.quickto
+Explicacion:
+ - El modelo ha dado 99.8% de confianza en phishing
+
+[01969]
+Asunto: Ultrasound blood purifier tackles fat problem
+Remitente: rssfeeds@spamassassin.taint.org
+Confianza: 99.8%
+  Texto analizado:
+    - TextAnalyzer: Ultrasound blood purifier tackles fat problem URL: http://www.newsisfree.com/click/-2,8199104,1440/ Date: Not supplied M
+    - Enlaces: http://www.newsisfree.com/click/-2,8199104,1440/
+Explicacion:
+ - El modelo ha dado 99.8% de confianza en phishing
+
+[02099]
+Asunto: Drug halves genital herpes transmission
+Remitente: rssfeeds@spamassassin.taint.org
+Confianza: 100.0%
+  Texto analizado:
+    - TextAnalyzer: Drug halves genital herpes transmission URL: http://www.newsisfree.com/click/-1,8397801,1440/ Date: Not supplied The ant
+    - Enlaces: http://www.newsisfree.com/click/-1,8397801,1440/
+Explicacion:
+ - El modelo ha dado 100.0% de confianza en phishing
+
+[02116]
+Asunto: Synthetic vitamin boosts bone growth
+Remitente: rssfeeds@spamassassin.taint.org
+Confianza: 99.9%
+  Texto analizado:
+    - TextAnalyzer: Synthetic vitamin boosts bone growth URL: http://www.newsisfree.com/click/-1,8412855,1440/ Date: Not supplied The modifi
+    - Enlaces: http://www.newsisfree.com/click/-1,8412855,1440/
+Explicacion:
+ - El modelo ha dado 99.9% de confianza en phishing
+
+[02148]
+Asunto: Contact lenses 'boost sexual success'
+Remitente: rssfeeds@spamassassin.taint.org
+Confianza: 50.9%
+  Texto analizado:
+    - TextAnalyzer: Contact lenses 'boost sexual success' URL: http://www.newsisfree.com/click/-2,8415795,1440/ Date: Not supplied Night-clu
+    - Enlaces: http://www.newsisfree.com/click/-2,8415795,1440/
+Explicacion:
+ - El modelo ha dado 50.9% de confianza en phishing
+
+[02177]
+Asunto: Patients to get chemically "sterilised" blood
+Remitente: rssfeeds@spamassassin.taint.org
+Confianza: 99.1%
+  Texto analizado:
+    - TextAnalyzer: Patients to get chemically "sterilised" blood URL: http://www.newsisfree.com/click/-2,8443954,1440/ Date: Not supplied H
+    - Enlaces: http://www.newsisfree.com/click/-2,8443954,1440/
+Explicacion:
+ - El modelo ha dado 99.1% de confianza en phishing
+
+[02251]
+Asunto: Profiteers resell Africa's Aids drugs
+Remitente: rssfeeds@spamassassin.taint.org
+Confianza: 84.7%
+  Texto analizado:
+    - TextAnalyzer: Profiteers resell Africa's Aids drugs URL: http://www.newsisfree.com/click/-5,8536504,215/ Date: 2002-10-04T03:40:03+01:
+    - Enlaces: http://www.newsisfree.com/click/-5,8536504,215/
+Explicacion:
+ - El modelo ha dado 84.7% de confianza en phishing
+
+[02261]
+Asunto: 'Miracle' gene therapy trial halted
+Remitente: rssfeeds@spamassassin.taint.org
+Confianza: 82.9%
+  Texto analizado:
+    - TextAnalyzer: 'Miracle' gene therapy trial halted URL: http://www.newsisfree.com/click/-4,8519920,1440/ Date: Not supplied A French tr
+    - Enlaces: http://www.newsisfree.com/click/-4,8519920,1440/
+Explicacion:
+ - El modelo ha dado 82.9% de confianza en phishing
+
+[02266]
+Asunto: Blood pressure drugs "slow ageing"
+Remitente: rssfeeds@spamassassin.taint.org
+Confianza: 97.1%
+  Texto analizado:
+    - TextAnalyzer: Blood pressure drugs "slow ageing" URL: http://www.newsisfree.com/click/-4,8512678,1440/ Date: Not supplied Drugs design
+    - Enlaces: http://www.newsisfree.com/click/-4,8512678,1440/
+Explicacion:
+ - El modelo ha dado 97.1% de confianza en phishing
+
+[02316]
+Asunto: Rapid immune reaction key to staving off AIDS
+Remitente: rssfeeds@spamassassin.taint.org
+Confianza: 99.9%
+  Texto analizado:
+    - TextAnalyzer: Rapid immune reaction key to staving off AIDS URL: http://www.newsisfree.com/click/-0,8616191,1440/ Date: Not supplied T
+    - Enlaces: http://www.newsisfree.com/click/-0,8616191,1440/
+Explicacion:
+ - El modelo ha dado 99.9% de confianza en phishing
+
+[02426]
+Asunto: Wannabe fathers ramp up testosterone
+Remitente: rssfeeds@spamassassin.taint.org
+Confianza: 99.9%
+  Texto analizado:
+    - TextAnalyzer: Wannabe fathers ramp up testosterone URL: http://www.newsisfree.com/click/-3,8714365,1440/ Date: Not supplied Men trying
+    - Enlaces: http://www.newsisfree.com/click/-3,8714365,1440/
+Explicacion:
+ - El modelo ha dado 99.9% de confianza en phishing
+
+Total: 29 correos
