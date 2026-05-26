@@ -143,3 +143,12 @@ Probamos cuatro modelos distintos de HuggingFace y comparamos su rendimiento uti
 | **cybersectony/distilbert_v2.4.1** | **270MB** | **93.33%** | **93.33%** |
 
 El modelo elegido fue `cybersectony/phishing-email-detection-distilbert_v2.4.1` por tener la mejor relación entre peso y rendimiento, consigue el mejor F1-score con solo 270MB, siendo además el más rápido de ejecutar.
+
+## Posibles mejoras
+
+- Procesar correos en lote en vez de uno a uno. Con GPU la diferencia de velocidad sería notable.
+- Añadir soporte para `.msg`, el formato nativo de Outlook.
+- Un parámetro `--threshold` para ajustar el umbral mínimo de confianza antes de marcar un correo como phishing.
+- Generar el informe en HTML en vez de `.txt` plano. Más fácil de leer y presentar.
+- Exponer el sistema como una API para integrarlo con otras aplicaciones sin tocar el código.
+- Desplegarlo como servidor SMTP intermediario, que es exactamente la arquitectura de producción descrita en la documentación.
