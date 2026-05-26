@@ -27,3 +27,6 @@ class Email:
             reply.print_thread(level + 1)                                    #O(1)
  
 #T(n) = 5 + 6 +2 + (1+2+1n) --> T(n)= 12 + (3+n)
+#O(n)
+#promedio(n)
+#Mejor caso(n)
