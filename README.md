@@ -97,7 +97,7 @@ output/
 
 ## Vídeo de presentación
 
-[Enlace al vídeo]
+https://enticat-my.sharepoint.com/:f:/r/personal/ethan_provencio_estudiant_enti_cat/Documents/2%20A%C3%B1o.Grado/Dise%C3%B1o/ProjectoFinal/VIDEO?csf=1&web=1&e=SZMewg
 
 ---
 
